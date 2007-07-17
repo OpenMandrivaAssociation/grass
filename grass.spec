@@ -88,7 +88,7 @@ through a graphical user interface and shell in X-Window.
 %prep
 %setup -q %{?_with_cvs:-b1 -n %{name}_%{cvsver}}%{!?_with_cvs:-n grass-%{version}}
 #patch2
-autoconf
+#autoconf
 
 %build
 export LDFLAGS="-L/usr/X11R6/%{_lib}"
