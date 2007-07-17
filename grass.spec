@@ -2,8 +2,8 @@
 %define cvs_m 05
 %define cvs_d 05
 %define cvsver exp_%{cvs_y}_%{cvs_m}_%{cvs_d}
-%define version	6.2.1
-%define rel 3
+%define version	6.2.2
+%define rel 1
 %define release %mkrel %rel
 #define release %{?_with_cvs:%mkrel -c %{cvs_y}%{cvs_m}%{cvs_d} %rel}%{!?_with_cvs:%mkrel %rel}
 %define grassfix 62
@@ -101,11 +101,6 @@ export LDFLAGS="-L/usr/X11R6/%{_lib}"
 %if %mdkversion >= 200700
 	--with-opengl-libs=%{_libdir} \
 	--with-motif-libs=%{_libdir} \
-%if 0
-	--with-glw \
-	--with-glw-includes=%{_includedir} \
-	--with-glw-libs=%{_libdir} \
-%endif
 	--with-motif-libs=%{_libdir} \
 	--with-motif-includes=%{_includedir} \
 %else
@@ -162,17 +157,6 @@ bzip2 $RPM_BUILD_ROOT/%{_libdir}/grass%{grassfix}/man/man?/*
 
 mkdir $RPM_BUILD_ROOT/%{_libdir}/grass%{grassfix}/locks/
 
-#Menu support:
-cat << EOF > $RPM_BUILD_ROOT/%{_menudir}/%{name}
-?package(%{name}):command="%{_bindir}/grass%{grassfix}" \
-icon="%{name}.png" \
-needs="text" \
-section="More Applications/Sciences/Geosciences" \
-title="Grass%{grassfix}" \
-longtitle="Geographic Resources Analysis Support System" \
-xdg="true"
-EOF
-
 mkdir -p $RPM_BUILD_ROOT%{_liconsdir} $RPM_BUILD_ROOT%{_iconsdir} $RPM_BUILD_ROOT%{_miconsdir}
 
 bzcat %{SOURCE2} > $RPM_BUILD_ROOT%{_liconsdir}/%{name}.png
@@ -204,12 +188,9 @@ EOF
 %defattr(-,root,root)
 %attr(0755,root,root) %{_bindir}/*
 %{_libdir}/grass%{grassfix}/
-%{_menudir}/%{name}
 %{_datadir}/applications/mandriva-grass.desktop
 %{_miconsdir}/*.png
 %{_liconsdir}/*.png
 %{_iconsdir}/*.png
 %attr(1777,root,root) %{_libdir}/grass%{grassfix}/locks
 %doc AUTHORS COPYING INSTALL README CHANGES
-
-
