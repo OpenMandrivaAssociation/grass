@@ -3,7 +3,7 @@
 %define cvs_d 05
 %define cvsver exp_%{cvs_y}_%{cvs_m}_%{cvs_d}
 %define version	6.2.2
-%define rel 1
+%define rel 2
 %define release %mkrel %rel
 #define release %{?_with_cvs:%mkrel -c %{cvs_y}%{cvs_m}%{cvs_d} %rel}%{!?_with_cvs:%mkrel %rel}
 %define grassfix 62
@@ -70,6 +70,7 @@ BuildRequires:	ffmpeg-devel
 BuildRequires:	freetype-devel
 BuildRequires:	python-devel
 BuildRequires:	sqlite-devel
+BuildRequires:	lzma
 %if %mdkversion >= 200700
 # deal with Xorg split
 BuildRequires:	mesaglw-devel
@@ -152,16 +153,16 @@ cp -a dist.%{_target_platform}/* %{buildroot}/%{_libdir}/grass%{grassfix}
 # Add makefiles to includes:
 cp -a include/Make %{buildroot}/%{_libdir}/grass%{grassfix}/include/
 
-# Manually bzip2 the man pages:
-bzip2 $RPM_BUILD_ROOT/%{_libdir}/grass%{grassfix}/man/man?/*
+# Manually archive the man pages:
+lzma $RPM_BUILD_ROOT/%{_libdir}/grass%{grassfix}/man/man?/*
 
 mkdir $RPM_BUILD_ROOT/%{_libdir}/grass%{grassfix}/locks/
 
-mkdir -p $RPM_BUILD_ROOT%{_liconsdir} $RPM_BUILD_ROOT%{_iconsdir} $RPM_BUILD_ROOT%{_miconsdir}
+mkdir -p $RPM_BUILD_ROOT%{_iconsdir}/hicolor/{16x16,32x32,48x48}/apps
 
-bzcat %{SOURCE2} > $RPM_BUILD_ROOT%{_liconsdir}/%{name}.png
-bzcat %{SOURCE3} > $RPM_BUILD_ROOT%{_iconsdir}/%{name}.png
-bzcat %{SOURCE4} > $RPM_BUILD_ROOT%{_miconsdir}/%{name}.png
+bzcat %{SOURCE2} > $RPM_BUILD_ROOT%{_iconsdir}/hicolor/48x48/apps/%{name}.png
+bzcat %{SOURCE3} > $RPM_BUILD_ROOT%{_iconsdir}/hicolor/32x32/apps/%{name}.png
+bzcat %{SOURCE4} > $RPM_BUILD_ROOT%{_iconsdir}/hicolor/16x16/apps/%{name}.png
 
 mkdir -p $RPM_BUILD_ROOT%{_datadir}/applications
 cat > $RPM_BUILD_ROOT%{_datadir}/applications/mandriva-%{name}.desktop << EOF
@@ -172,7 +173,7 @@ Exec=%{_bindir}/grass%{grassfix}
 Icon=%{name}
 Terminal=true
 Type=Application
-Categories=X-MandrivaLinux-MoreApplications-Sciences-Geosciences;Science;Geology;
+Categories=Science;Geology;
 EOF
 
 %clean
@@ -180,17 +181,19 @@ EOF
 
 %post
 %update_menus
+%update_icon_cache hicolor
 
 %postun
 %clean_menus
+%clean_icon_cache hicolor
 
 %files
 %defattr(-,root,root)
 %attr(0755,root,root) %{_bindir}/*
 %{_libdir}/grass%{grassfix}/
 %{_datadir}/applications/mandriva-grass.desktop
-%{_miconsdir}/*.png
-%{_liconsdir}/*.png
-%{_iconsdir}/*.png
+%{_iconsdir}/hicolor/48x48/apps/%{name}.png
+%{_iconsdir}/hicolor/32x32/apps/%{name}.png
+%{_iconsdir}/hicolor/16x16/apps/%{name}.png
 %attr(1777,root,root) %{_libdir}/grass%{grassfix}/locks
 %doc AUTHORS COPYING INSTALL README CHANGES
