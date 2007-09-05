@@ -32,7 +32,6 @@ Source:		http://grass.itc.it/grass%{grassfix}/source/grass-%{version}.tar.gz
 Source2: 	grass5_48.png.bz2
 Source3: 	grass5_32.png.bz2
 Source4: 	grass5_16.png.bz2
-Patch2:		grass51-20030614-blas-lapack-libs.patch
 BuildRoot: 	%{_tmppath}/%{name}-%{version}-root
 
 Requires:	xterm 
@@ -56,7 +55,6 @@ BuildRequires:  readline-devel
 BuildRequires:  postgresql-devel
 BuildRequires:	gcc-gfortran 
 BuildRequires:  gdal-devel >= 1.2.0 
-BuildRequires:  libblas-devel 
 BuildRequires:  flex 
 BuildRequires:  bison
 BuildRequires:  proj-devel proj >= 4.4.7
