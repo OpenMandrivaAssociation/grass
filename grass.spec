@@ -3,7 +3,7 @@
 %define cvs_d 05
 %define cvsver exp_%{cvs_y}_%{cvs_m}_%{cvs_d}
 %define version	6.2.2
-%define rel 3
+%define rel 4
 %define release %mkrel %rel
 #define release %{?_with_cvs:%mkrel -c %{cvs_y}%{cvs_m}%{cvs_d} %rel}%{!?_with_cvs:%mkrel %rel}
 %define grassfix 62
