@@ -2,8 +2,8 @@
 %define cvs_m 05
 %define cvs_d 05
 %define cvsver exp_%{cvs_y}_%{cvs_m}_%{cvs_d}
-%define version	6.2.2
-%define rel 4
+%define version	6.2.3
+%define rel 1
 %define release %mkrel %rel
 #define release %{?_with_cvs:%mkrel -c %{cvs_y}%{cvs_m}%{cvs_d} %rel}%{!?_with_cvs:%mkrel %rel}
 %define grassfix 62
@@ -21,7 +21,7 @@ Name: 		%{name}
 Version: 	%{version}
 Release: 	%{release}
 Group: 		Sciences/Geosciences
-License: 	GPL
+License: 	GPLv2+
 URL: 		http://grass.itc.it/
 %if %{?_with_cvs:1}%{!?_with_cvs:0}
 Source: 	http://grass.itc.it/%{name}/source/snapshot/%{name}src_cvs_snapshot_%{cvsver}.tar.gz
