@@ -2,25 +2,15 @@
 %define cvs_m 05
 %define cvs_d 05
 %define cvsver exp_%{cvs_y}_%{cvs_m}_%{cvs_d}
-%define version	6.2.3
-%define rel 1
-%define release %mkrel %rel
-#define release %{?_with_cvs:%mkrel -c %{cvs_y}%{cvs_m}%{cvs_d} %rel}%{!?_with_cvs:%mkrel %rel}
 %define grassfix 62
-#if %mdkversion >= 200710
-%define name grass
-#Obsoletes: grass%{grassfix}
-#else
-#define name grass%{?grassfix:%grassfix}
-#endif
 
 %{?_with_cvs: %define build_cvs 1}
 
-Summary: 	Geographic Resources Analysis Support System
-Name: 		%{name}
-Version: 	%{version}
-Release: 	%{release}
+Name: 		grass
+Version: 	6.2.3
+Release: 	%mkrel 2
 Group: 		Sciences/Geosciences
+Summary: 	Geographic Resources Analysis Support System
 License: 	GPLv2+
 URL: 		http://grass.itc.it/
 %if %{?_with_cvs:1}%{!?_with_cvs:0}
@@ -143,8 +133,6 @@ mkdir -p $RPM_BUILD_ROOT/%{_menudir}
 sed -e 's|^GISBASE.*|GISBASE=%{_libdir}/grass%{grassfix}|' \
  bin.%{_target_platform}/grass%{grassfix} > $RPM_BUILD_ROOT/%{_bindir}/grass%{grassfix}
 chmod a+x $RPM_BUILD_ROOT/usr/bin/grass%{grassfix}
-#cp $RPM_BUILD_PATH/bin.i586-mandrake-linux-gnu/gmake5 $RPM_BUILD_ROOT/usr/bin
-#cp $RPM_BUILD_PATH/bin.i586-mandrake-linux-gnu/gmakelinks5 $RPM_BUILD_ROOT/usr/bin
 
 mkdir -p %{buildroot}/%{_libdir}/grass%{grassfix}
 cp -a dist.%{_target_platform}/* %{buildroot}/%{_libdir}/grass%{grassfix}
@@ -175,24 +163,30 @@ Type=Application
 Categories=Science;Geology;
 EOF
 
+mkdir -p $RPM_BUILD_ROOT%_sysconfdir/ld.so.conf.d
+cat > $RPM_BUILD_ROOT%_sysconfdir/ld.so.conf.d/grass.conf << EOF
+%_libdir/grass62/lib
+EOF
+
 %clean
 [ "$RPM_BUILD_ROOT" != "/" ] && rm -rf "$RPM_BUILD_ROOT"
 
 %post
 %update_menus
 %update_icon_cache hicolor
+/sbin/ldconfig
 
 %postun
 %clean_menus
 %clean_icon_cache hicolor
+/sbin/ldconfig
 
 %files
 %defattr(-,root,root)
 %attr(0755,root,root) %{_bindir}/*
+%_sysconfdir/ld.so.conf.d/*
 %{_libdir}/grass%{grassfix}/
 %{_datadir}/applications/mandriva-grass.desktop
-%{_iconsdir}/hicolor/48x48/apps/%{name}.png
-%{_iconsdir}/hicolor/32x32/apps/%{name}.png
-%{_iconsdir}/hicolor/16x16/apps/%{name}.png
+%{_iconsdir}/*/*/*/*
 %attr(1777,root,root) %{_libdir}/grass%{grassfix}/locks
 %doc AUTHORS COPYING INSTALL README CHANGES
