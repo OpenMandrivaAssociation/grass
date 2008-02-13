@@ -23,11 +23,10 @@ Source2: 	grass5_48.png.bz2
 Source3: 	grass5_32.png.bz2
 Source4: 	grass5_16.png.bz2
 BuildRoot: 	%{_tmppath}/%{name}-%{version}-root
-
-Requires:	xterm 
-Requires:       tk 
-Requires:       tcl
-
+Requires: xterm 
+Requires: tk 
+Requires: tcl
+BuildRequires:  libxmu-devel
 BuildRequires: 	png-devel 
 BuildRequires:  jpeg-devel 
 BuildRequires:  tiff-devel 
