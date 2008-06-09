@@ -58,10 +58,8 @@ BuildRequires:	freetype-devel
 BuildRequires:	python-devel
 BuildRequires:	sqlite-devel
 BuildRequires:	lzma
-%if %mdkversion >= 200700
 # deal with Xorg split
 BuildRequires:	mesaglw-devel
-%endif
 
 Obsoletes:	grass57
 Provides:	grass57 = %{version}-%{release}
@@ -86,15 +84,10 @@ export LDFLAGS="-L/usr/X11R6/%{_lib}"
 	--with-freetype \
 	--with-freetype-includes=%{_includedir}/freetype2 \
 	--with-motif \
-%if %mdkversion >= 200700
 	--with-opengl-libs=%{_libdir} \
 	--with-motif-libs=%{_libdir} \
 	--with-motif-libs=%{_libdir} \
 	--with-motif-includes=%{_includedir} \
-%else
-	--with-opengl-libs=%{_prefix}/X11R6/%{_lib} \
-	--with-motif-includes=%{_prefix}/X11R6/include \
-%endif
 	--with-gdal  \
 	--with-mysql --with-mysql-includes=%{_includedir}/mysql \
 	--with-odbc \
