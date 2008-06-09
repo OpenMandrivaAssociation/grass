@@ -173,12 +173,16 @@ EOF
 %post
 %update_menus
 %update_icon_cache hicolor
+%if %mdkversion < 200900
 /sbin/ldconfig
+%endif
 
 %postun
 %clean_menus
 %clean_icon_cache hicolor
+%if %mdkversion < 200900
 /sbin/ldconfig
+%endif
 
 %files
 %defattr(-,root,root)
