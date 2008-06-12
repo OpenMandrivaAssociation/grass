@@ -164,15 +164,19 @@ EOF
 [ "$RPM_BUILD_ROOT" != "/" ] && rm -rf "$RPM_BUILD_ROOT"
 
 %post
+%if %mdkversion < 200900
 %update_menus
 %update_icon_cache hicolor
+%endif
 %if %mdkversion < 200900
 /sbin/ldconfig
 %endif
 
 %postun
+%if %mdkversion < 200900
 %clean_menus
 %clean_icon_cache hicolor
+%endif
 %if %mdkversion < 200900
 /sbin/ldconfig
 %endif
