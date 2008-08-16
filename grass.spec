@@ -8,7 +8,7 @@
 
 Name: 		grass
 Version: 	6.2.3
-Release: 	%mkrel 4
+Release: 	%mkrel 5
 Group: 		Sciences/Geosciences
 Summary: 	Geographic Resources Analysis Support System
 License: 	GPLv2+
@@ -77,10 +77,13 @@ through a graphical user interface and shell in X-Window.
 #autoconf
 
 %build
-export LDFLAGS="-L/usr/X11R6/%{_lib}"
 %configure \
 	--with-dbm-includes=%{_includedir}/gdbm/ \
+%if %mdkversion >= 200900
+	--with-postgres-includes=%{_includedir}/ \
+%else
 	--with-postgres-includes='%{_includedir}/pgsql %{_includedir}/pgsql/internal' \
+%endif
 	--with-freetype \
 	--with-freetype-includes=%{_includedir}/freetype2 \
 	--with-motif \
@@ -92,13 +95,18 @@ export LDFLAGS="-L/usr/X11R6/%{_lib}"
 	--with-mysql --with-mysql-includes=%{_includedir}/mysql \
 	--with-odbc \
 	--enable-largefile \
+%if %mdkversion >= 200900
+	--with-ffmpeg --with-ffmpeg-includes=%{_includedir}/libavcodec \
+%else
 	--with-ffmpeg --with-ffmpeg-includes=%{_includedir}/ffmpeg \
+%endif
 	--with-curses \
 	--with-python \
 	--with-sqlite \
 	--with-cxx \
 	--with-proj-share=%{_datadir}/proj \
 	--with-nls \
+	--with-readline \
 	%{?_with_cvs:--with-grass50=`pwd`/../grass50_%{cvsver}}
 
 #Options that aren't really used
