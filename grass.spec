@@ -13,6 +13,8 @@ Source3: 	grass5_32.png.bz2
 Source4: 	grass5_16.png.bz2
 Patch0:		grass-6.2.3-fix-str-fmt.patch
 Patch1:		grass-6.2.3-fix-linkage.patch
+Patch2:		grass-6.2.3-gcc43.patch
+Patch3:		grass-6.2.3-fix-fopen.patch
 BuildRoot: 	%{_tmppath}/%{name}-%{version}-root
 Requires: xterm 
 Requires: tk 
@@ -66,6 +68,8 @@ through a graphical user interface and shell in X-Window.
 %setup -q
 %patch0 -p1 -b .str
 %patch1 -p0 -b .linkage
+%patch2 -p0 -b .gcc43
+%patch3 -p0 -b .fopen
 
 %build
 %configure \
