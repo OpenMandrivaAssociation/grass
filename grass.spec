@@ -1,10 +1,4 @@
-%define cvs_y 2004
-%define cvs_m 05
-%define cvs_d 05
-%define cvsver exp_%{cvs_y}_%{cvs_m}_%{cvs_d}
-%define grassfix 62
-
-%{?_with_cvs: %define build_cvs 1}
+%define grassfix 63
 
 Name: 		grass
 Version: 	6.2.3
@@ -13,12 +7,7 @@ Group: 		Sciences/Geosciences
 Summary: 	Geographic Resources Analysis Support System
 License: 	GPLv2+
 URL: 		http://grass.itc.it/
-%if %{?_with_cvs:1}%{!?_with_cvs:0}
-Source: 	http://grass.itc.it/%{name}/source/snapshot/%{name}src_cvs_snapshot_%{cvsver}.tar.gz
-Source1: 	http://grass.itc.it/grass50/source/snapshot/grass50src_cvs_snapshot_%{cvsver}.tar.gz
-%else
 Source:		http://grass.itc.it/grass%{grassfix}/source/grass-%{version}.tar.gz
-%endif
 Source2: 	grass5_48.png.bz2
 Source3: 	grass5_32.png.bz2
 Source4: 	grass5_16.png.bz2
@@ -72,9 +61,7 @@ production functionality that operates on various platforms
 through a graphical user interface and shell in X-Window.
 
 %prep
-%setup -q %{?_with_cvs:-b1 -n %{name}_%{cvsver}}%{!?_with_cvs:-n grass-%{version}}
-#patch2
-#autoconf
+%setup -q
 
 %build
 %configure \
@@ -96,7 +83,7 @@ through a graphical user interface and shell in X-Window.
 	--with-odbc \
 	--enable-largefile \
 %if %mdkversion >= 200900
-	--with-ffmpeg --with-ffmpeg-includes=%{_includedir}/libavcodec \
+	--with-ffmpeg --with-ffmpeg-includes=%{_includedir}/libav* \
 %else
 	--with-ffmpeg --with-ffmpeg-includes=%{_includedir}/ffmpeg \
 %endif
