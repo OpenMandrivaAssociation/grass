@@ -1,4 +1,4 @@
-%define grassfix 63
+%define grassfix 62
 
 Name: 		grass
 Version: 	6.2.3
@@ -55,7 +55,6 @@ BuildRequires:	lzma
 BuildRequires:	mesaglw-devel
 
 Obsoletes:	grass57
-Provides:	grass57 = %{version}-%{release}
 
 %description
 GRASS (Geographic Resources Analysis Support System) is an 
@@ -73,6 +72,9 @@ through a graphical user interface and shell in X-Window.
 
 %build
 %configure \
+%if "%_lib" = "lib64"
+	--enable-64bit \
+%endif
 	--with-dbm-includes=%{_includedir}/gdbm/ \
 %if %mdkversion >= 200900
 	--with-postgres-includes=%{_includedir}/ \
@@ -102,7 +104,6 @@ through a graphical user interface and shell in X-Window.
 	--with-proj-share=%{_datadir}/proj \
 	--with-nls \
 	--with-readline \
-	%{?_with_cvs:--with-grass50=`pwd`/../grass50_%{cvsver}}
 
 #Options that aren't really used
 #	--with-blas \
