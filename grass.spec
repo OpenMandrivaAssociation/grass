@@ -72,7 +72,7 @@ through a graphical user interface and shell in X-Window.
 
 %build
 %configure \
-%if "%_lib" = "lib64"
+%if "%_lib" != "lib"
 	--enable-64bit \
 %endif
 	--with-dbm-includes=%{_includedir}/gdbm/ \
