@@ -1,18 +1,19 @@
-%define grassfix 62
+%define grassfix 64
+%define betaver RC2
 
 Name: 		grass
-Version: 	6.2.3
-Release: 	%mkrel 6
+Version: 	6.4.0
+Release: 	%mkrel -c %betaver 1
 Group: 		Sciences/Geosciences
 Summary: 	Geographic Resources Analysis Support System
 License: 	GPLv2+
 URL: 		http://grass.itc.it/
-Source:		http://grass.itc.it/grass%{grassfix}/source/grass-%{version}.tar.gz
+Source:		http://grass.itc.it/grass%{grassfix}/source/grass-%{version}%{betaver}.tar.gz
 Source2: 	grass5_48.png.bz2
 Source3: 	grass5_32.png.bz2
 Source4: 	grass5_16.png.bz2
 Patch0:		grass-6.2.3-fix-str-fmt.patch
-Patch1:		grass-6.2.3-fix-linkage.patch
+Patch1:		grass-6.4.0-fix-linkage.patch
 Patch2:		grass-6.2.3-gcc43.patch
 Patch3:		grass-6.2.3-fix-fopen.patch
 BuildRoot: 	%{_tmppath}/%{name}-%{version}-root
@@ -37,7 +38,8 @@ BuildRequires:  readline-devel
 BuildRequires:  postgresql-devel
 BuildRequires:	gcc-gfortran 
 BuildRequires:  gdal-devel >= 1.2.0 
-BuildRequires:  flex 
+BuildRequires:  flex
+BuildRequires:	swig 
 BuildRequires:  bison
 BuildRequires:  proj-devel proj >= 4.4.7
 BuildRequires:  tcl tcl-devel
@@ -49,6 +51,7 @@ BuildRequires:	termcap-devel
 BuildRequires:	ffmpeg-devel
 BuildRequires:	freetype-devel
 BuildRequires:	python-devel
+BuildRequires:	libwxPythonGTK-devel
 BuildRequires:	sqlite-devel
 BuildRequires:	lzma
 # deal with Xorg split
@@ -64,13 +67,18 @@ production functionality that operates on various platforms
 through a graphical user interface and shell in X-Window.
 
 %prep
-%setup -q
+%setup -q -n %name-%{version}%{betaver}
+%if 0
 %patch0 -p1 -b .str
 %patch1 -p0 -b .linkage
 %patch2 -p0 -b .gcc43
 %patch3 -p0 -b .fopen
+%endif
+%patch1 -p0 -b .linkage
 
 %build
+%define __cputoolize true
+%define Werror_cflags %nil
 %configure \
 %if "%_lib" != "lib"
 	--enable-64bit \
@@ -93,12 +101,12 @@ through a graphical user interface and shell in X-Window.
 	--with-odbc \
 	--enable-largefile \
 %if %mdkversion >= 200900
-	--with-ffmpeg --with-ffmpeg-includes=%{_includedir}/libav* \
+	--with-ffmpeg --with-ffmpeg-includes=%{_includedir}/lib*/ \
 %else
 	--with-ffmpeg --with-ffmpeg-includes=%{_includedir}/ffmpeg \
 %endif
 	--with-curses \
-	--with-python \
+	--with-python --with-wxwidgets="/usr/lib/wxPython/bin/wx-config"\
 	--with-sqlite \
 	--with-cxx \
 	--with-proj-share=%{_datadir}/proj \
