@@ -49,7 +49,6 @@ BuildRequires:	unixODBC-devel
 BuildRequires:  mysql-devel
 BuildRequires:	termcap-devel
 BuildRequires:	ffmpeg-devel
-BuildRequires:	freetype-devel
 BuildRequires:	python-devel
 BuildRequires:	libwxPythonGTK-devel
 BuildRequires:	sqlite-devel
