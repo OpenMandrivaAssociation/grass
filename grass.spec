@@ -16,6 +16,7 @@ Patch0:		grass-6.2.3-fix-str-fmt.patch
 Patch1:		grass-6.4.0-fix-linkage.patch
 Patch2:		grass-6.2.3-gcc43.patch
 Patch3:		grass-6.2.3-fix-fopen.patch
+Patch4:		grass-6.4.0-tcl8.6.patch
 BuildRoot: 	%{_tmppath}/%{name}-%{version}-root
 Requires: xterm 
 Requires: tk 
@@ -74,6 +75,7 @@ through a graphical user interface and shell in X-Window.
 %patch3 -p0 -b .fopen
 %endif
 %patch1 -p0 -b .linkage
+%patch4 -p0 -b .tcl
 
 %build
 %define __cputoolize true
