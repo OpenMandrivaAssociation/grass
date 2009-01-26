@@ -122,7 +122,6 @@ make||make
 %install
 [ "$RPM_BUILD_ROOT" != "/" ] && rm -rf "$RPM_BUILD_ROOT"
 mkdir -p $RPM_BUILD_ROOT/%{_bindir}
-mkdir -p $RPM_BUILD_ROOT/%{_menudir}
 #%makeinstall_std INST_DIR=%{_libdir}/grass%{grassfix}
 # Actions in make install that don't take into account packaging in a place different to running:
 sed -e 's|^GISBASE.*|GISBASE=%{_libdir}/grass%{grassfix}|' \
@@ -160,7 +159,7 @@ EOF
 
 mkdir -p $RPM_BUILD_ROOT%_sysconfdir/ld.so.conf.d
 cat > $RPM_BUILD_ROOT%_sysconfdir/ld.so.conf.d/grass.conf << EOF
-%_libdir/grass62/lib
+%_libdir/grassi%{grassfix}/lib
 EOF
 
 %clean
