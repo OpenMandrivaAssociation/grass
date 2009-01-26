@@ -102,22 +102,9 @@ through a graphical user interface and shell in X-Window.
 	--with-cxx \
 	--with-proj-share=%{_datadir}/proj \
 	--with-nls \
-	--with-readline \
+	--with-readline
 
-#Options that aren't really used
-#	--with-blas \
-#	--with-lapack \
-#	--with-dbm \
-
-#Fix messy grass readline misdetection:
-perl -pi -e "s/^READLINELIB .*\$/READLINELIB         =  -lreadline -ltermcap/g" include/Make/Platform.make
-perl -pi -e "s/^HISTORYLIB.*\$/HISTORYLIB          =  -lhistory/g" include/Make/Platform.make
-perl -pi -e 's,/\* #undef HAVE_READLINE_READLINE_H \*/,#define HAVE_READLINE_READLINE_H 1,g' include/config.h
-%if %{?_with_cvs:1}%{!?_with_cvs:0}
-make mix
-%endif
-#r.mapcalc not building first time around:
-make||make
+%make
 
 %install
 [ "$RPM_BUILD_ROOT" != "/" ] && rm -rf "$RPM_BUILD_ROOT"
