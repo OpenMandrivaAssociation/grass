@@ -1,5 +1,5 @@
 %define grassfix 64
-%define betaver RC2
+%define betaver RC3
 
 Name: 		grass
 Version: 	6.4.0
@@ -13,7 +13,6 @@ Source2: 	grass5_48.png.bz2
 Source3: 	grass5_32.png.bz2
 Source4: 	grass5_16.png.bz2
 Patch0:		grass-6.2.3-fix-str-fmt.patch
-Patch1:		grass-6.4.0-fix-linkage.patch
 Patch2:		grass-6.2.3-gcc43.patch
 Patch3:		grass-6.2.3-fix-fopen.patch
 Patch4:		grass-6.4.0-tcl8.6.patch
@@ -68,14 +67,7 @@ through a graphical user interface and shell in X-Window.
 
 %prep
 %setup -q -n %name-%{version}%{betaver}
-%if 0
-%patch0 -p1 -b .str
-%patch1 -p0 -b .linkage
-%patch2 -p0 -b .gcc43
-%patch3 -p0 -b .fopen
-%endif
-%patch1 -p0 -b .linkage
-%patch4 -p0 -b .tcl
+#patch4 -p0 -b .tcl
 
 %build
 %define __cputoolize true
