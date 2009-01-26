@@ -72,7 +72,7 @@ through a graphical user interface and shell in X-Window.
 %build
 %define __cputoolize true
 %define Werror_cflags %nil
-%configure \
+%configure2_5x --host=%{_host} \
 %if "%_lib" != "lib"
 	--enable-64bit \
 %endif
