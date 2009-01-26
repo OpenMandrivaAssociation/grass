@@ -13,8 +13,6 @@ Source2: 	grass5_48.png.bz2
 Source3: 	grass5_32.png.bz2
 Source4: 	grass5_16.png.bz2
 Patch0:		grass-6.2.3-fix-str-fmt.patch
-Patch2:		grass-6.2.3-gcc43.patch
-Patch3:		grass-6.2.3-fix-fopen.patch
 Patch4:		grass-6.4.0-tcl8.6.patch
 BuildRoot: 	%{_tmppath}/%{name}-%{version}-root
 Requires: xterm 
