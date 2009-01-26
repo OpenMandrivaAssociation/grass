@@ -146,7 +146,7 @@ EOF
 
 mkdir -p $RPM_BUILD_ROOT%_sysconfdir/ld.so.conf.d
 cat > $RPM_BUILD_ROOT%_sysconfdir/ld.so.conf.d/grass.conf << EOF
-%_libdir/grassi%{grassfix}/lib
+%_libdir/grass%{grassfix}/lib
 EOF
 
 %clean
