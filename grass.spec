@@ -3,7 +3,7 @@
 
 Name: 		grass
 Version: 	6.4.0
-Release: 	%mkrel -c %betaver 1
+Release: 	%mkrel -c %betaver 2
 Group: 		Sciences/Geosciences
 Summary: 	Geographic Resources Analysis Support System
 License: 	GPLv2+
@@ -24,6 +24,7 @@ BuildRequires:  jpeg-devel
 BuildRequires:  tiff-devel 
 BuildRequires:  gd-devel >= 2.0 
 BuildRequires:  freetype2-devel
+BuildRequires:	cairo-devel
 BuildRequires: 	MesaGLU-devel 
 BuildRequires:  unixODBC-devel 
 BuildRequires:  fftw-devel 
@@ -75,6 +76,7 @@ through a graphical user interface and shell in X-Window.
 	--enable-64bit \
 %endif
 	--with-dbm-includes=%{_includedir}/gdbm/ \
+	--with-postgres \
 %if %mdkversion >= 200900
 	--with-postgres-includes=%{_includedir}/ \
 %else
@@ -83,6 +85,7 @@ through a graphical user interface and shell in X-Window.
 	--with-freetype \
 	--with-freetype-includes=%{_includedir}/freetype2 \
 	--with-motif \
+	--with-cairo \
 	--with-opengl-libs=%{_libdir} \
 	--with-motif-libs=%{_libdir} \
 	--with-motif-libs=%{_libdir} \
