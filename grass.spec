@@ -7,8 +7,8 @@ Release: 	%mkrel -c %betaver 2
 Group: 		Sciences/Geosciences
 Summary: 	Geographic Resources Analysis Support System
 License: 	GPLv2+
-URL: 		http://grass.itc.it/
-Source:		http://grass.itc.it/grass%{grassfix}/source/grass-%{version}%{betaver}.tar.gz
+URL: 		http://grass.osgeo.org/
+Source:		http://grass.osgeo.org/grass%{grassfix}/source/grass-%{version}%{betaver}.tar.gz
 Source2: 	grass5_48.png.bz2
 Source3: 	grass5_32.png.bz2
 Source4: 	grass5_16.png.bz2
