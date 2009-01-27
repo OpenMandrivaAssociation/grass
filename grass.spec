@@ -14,6 +14,7 @@ Source3: 	grass5_32.png.bz2
 Source4: 	grass5_16.png.bz2
 Patch0:		grass-6.2.3-fix-str-fmt.patch
 Patch4:		grass-6.4.0-tcl8.6.patch
+Patch5:		grass-6.4.0-fix-cairo-detection.patch
 BuildRoot: 	%{_tmppath}/%{name}-%{version}-root
 Requires: xterm 
 Requires: tk 
@@ -66,6 +67,7 @@ through a graphical user interface and shell in X-Window.
 
 %prep
 %setup -q -n %name-%{version}%{betaver}
+%patch5 -p0
 #patch4 -p0 -b .tcl
 
 %build
