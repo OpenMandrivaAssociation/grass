@@ -1,5 +1,5 @@
 %define grassfix 64
-%define betaver RC4
+%define betaver RC5
 
 Name: 		grass
 Version: 	6.4.0
@@ -12,8 +12,6 @@ Source:		http://grass.osgeo.org/grass%{grassfix}/source/grass-%{version}%{betave
 Source2: 	grass5_48.png.bz2
 Source3: 	grass5_32.png.bz2
 Source4: 	grass5_16.png.bz2
-Patch1:		grass-6.4.0-linkage.patch
-Patch5:		grass-6.4.0-fix-cairo-detection.patch
 BuildRoot: 	%{_tmppath}/%{name}-%{version}-root
 Requires: xterm 
 Requires: tk 
@@ -66,8 +64,6 @@ through a graphical user interface and shell in X-Window.
 
 %prep
 %setup -q -n %name-%{version}%{betaver}
-%patch1 -p0
-%patch5 -p0
 
 %build
 %define __cputoolize true
