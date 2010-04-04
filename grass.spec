@@ -12,6 +12,7 @@ Source:		http://grass.osgeo.org/grass%{grassfix}/source/grass-%{version}%{betave
 Source2: 	grass5_48.png.bz2
 Source3: 	grass5_32.png.bz2
 Source4: 	grass5_16.png.bz2
+Patch0:		grass-6.4.0RC6-fix-link.patch
 BuildRoot: 	%{_tmppath}/%{name}-%{version}-root
 Requires: xterm 
 Requires: tk 
@@ -64,6 +65,7 @@ through a graphical user interface and shell in X-Window.
 
 %prep
 %setup -q -n %name-%{version}%{betaver}
+%patch0 -p0
 
 %build
 %define __cputoolize true
