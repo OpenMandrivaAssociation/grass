@@ -1,5 +1,5 @@
 %define grassfix 64
-%define betaver RC5
+%define betaver RC6
 
 Name: 		grass
 Version: 	6.4.0
