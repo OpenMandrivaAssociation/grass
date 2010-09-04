@@ -91,7 +91,10 @@ through a graphical user interface and shell in X-Window.
 	--with-odbc \
 	--enable-largefile \
 %if %mdkversion >= 200900
-	--with-ffmpeg --with-ffmpeg-includes=%{_includedir}/lib*/ \
+	--with-ffmpeg --with-ffmpeg-includes="%{_includedir}/libavcodec \
+	%{_includedir}/libavdevice \
+	%{_includedir}/libavformat %{_includedir}/libavutil \
+	%{_includedir}/libpostproc %{_includedir}/libswscale" \
 %else
 	--with-ffmpeg --with-ffmpeg-includes=%{_includedir}/ffmpeg \
 %endif
