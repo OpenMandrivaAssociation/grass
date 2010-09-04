@@ -1,14 +1,13 @@
 %define grassfix 64
-%define betaver RC6
 
 Name: 		grass
 Version: 	6.4.0
-Release: 	%mkrel -c %betaver 1
+Release: 	%mkrel 1
 Group: 		Sciences/Geosciences
 Summary: 	Geographic Resources Analysis Support System
 License: 	GPLv2+
 URL: 		http://grass.osgeo.org/
-Source:		http://grass.osgeo.org/grass%{grassfix}/source/grass-%{version}%{betaver}.tar.gz
+Source:		http://grass.osgeo.org/grass%{grassfix}/source/grass-%{version}.tar.gz
 Source2: 	grass5_48.png.bz2
 Source3: 	grass5_32.png.bz2
 Source4: 	grass5_16.png.bz2
@@ -64,7 +63,7 @@ production functionality that operates on various platforms
 through a graphical user interface and shell in X-Window.
 
 %prep
-%setup -q -n %name-%{version}%{betaver}
+%setup -q -n %name-%{version}
 %patch0 -p0
 
 %build
