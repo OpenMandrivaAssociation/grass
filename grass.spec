@@ -8,10 +8,9 @@ Summary: 	Geographic Resources Analysis Support System
 License: 	GPLv2+
 URL: 		http://grass.osgeo.org/
 Source:		http://grass.osgeo.org/grass%{grassfix}/source/grass-%{version}.tar.gz
-Source2: 	grass5_48.png.bz2
-Source3: 	grass5_32.png.bz2
-Source4: 	grass5_16.png.bz2
-Patch0:		grass-6.4.0RC6-fix-link.patch
+Source2: 	grass5_48.png
+Source3: 	grass5_32.png
+Source4: 	grass5_16.png
 BuildRoot: 	%{_tmppath}/%{name}-%{version}-root
 Requires: xterm 
 Requires: tk 
@@ -64,7 +63,6 @@ through a graphical user interface and shell in X-Window.
 
 %prep
 %setup -q -n %name-%{version}
-%patch0 -p0
 
 %build
 %define __cputoolize true
@@ -129,9 +127,9 @@ mkdir $RPM_BUILD_ROOT/%{_libdir}/grass%{grassfix}/locks/
 
 mkdir -p $RPM_BUILD_ROOT%{_iconsdir}/hicolor/{16x16,32x32,48x48}/apps
 
-bzcat %{SOURCE2} > $RPM_BUILD_ROOT%{_iconsdir}/hicolor/48x48/apps/%{name}.png
-bzcat %{SOURCE3} > $RPM_BUILD_ROOT%{_iconsdir}/hicolor/32x32/apps/%{name}.png
-bzcat %{SOURCE4} > $RPM_BUILD_ROOT%{_iconsdir}/hicolor/16x16/apps/%{name}.png
+install -m644 %{SOURCE2} $RPM_BUILD_ROOT%{_iconsdir}/hicolor/48x48/apps/%{name}.png
+install -m644 %{SOURCE3} $RPM_BUILD_ROOT%{_iconsdir}/hicolor/32x32/apps/%{name}.png
+install -m644 %{SOURCE4} $RPM_BUILD_ROOT%{_iconsdir}/hicolor/16x16/apps/%{name}.png
 
 mkdir -p $RPM_BUILD_ROOT%{_datadir}/applications
 cat > $RPM_BUILD_ROOT%{_datadir}/applications/mandriva-%{name}.desktop << EOF
