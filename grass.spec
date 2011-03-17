@@ -2,7 +2,7 @@
 
 Name: 		grass
 Version: 	6.4.0
-Release: 	%mkrel 5
+Release: 	%mkrel 6
 Group: 		Sciences/Geosciences
 Summary: 	Geographic Resources Analysis Support System
 License: 	GPLv2+
