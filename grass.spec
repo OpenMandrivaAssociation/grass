@@ -1,8 +1,8 @@
 %define grassfix 64
 
 Name: 		grass
-Version: 	6.4.0
-Release: 	%mkrel 6
+Version: 	6.4.1
+Release: 	%mkrel 1
 Group: 		Sciences/Geosciences
 Summary: 	Geographic Resources Analysis Support System
 License: 	GPLv2+
