@@ -1,8 +1,8 @@
 %define grassfix 64
 
 Name: 		grass
-Version: 	6.4.1
-Release: 	%mkrel 1
+Version: 	6.4.2
+Release: 	1
 Group: 		Sciences/Geosciences
 Summary: 	Geographic Resources Analysis Support System
 License: 	GPLv2+
@@ -109,7 +109,6 @@ through a graphical user interface and shell in X-Window.
 %make
 
 %install
-[ "$RPM_BUILD_ROOT" != "/" ] && rm -rf "$RPM_BUILD_ROOT"
 mkdir -p $RPM_BUILD_ROOT/%{_bindir}
 #%makeinstall_std INST_DIR=%{_libdir}/grass%{grassfix}
 # Actions in make install that don't take into account packaging in a place different to running:
@@ -151,29 +150,7 @@ cat > $RPM_BUILD_ROOT%_sysconfdir/ld.so.conf.d/grass.conf << EOF
 %_libdir/grass%{grassfix}/lib
 EOF
 
-%clean
-[ "$RPM_BUILD_ROOT" != "/" ] && rm -rf "$RPM_BUILD_ROOT"
-
-%post
-%if %mdkversion < 200900
-%update_menus
-%update_icon_cache hicolor
-%endif
-%if %mdkversion < 200900
-/sbin/ldconfig
-%endif
-
-%postun
-%if %mdkversion < 200900
-%clean_menus
-%clean_icon_cache hicolor
-%endif
-%if %mdkversion < 200900
-/sbin/ldconfig
-%endif
-
 %files
-%defattr(-,root,root)
 %attr(0755,root,root) %{_bindir}/*
 %_sysconfdir/ld.so.conf.d/*
 %{_libdir}/grass%{grassfix}/
