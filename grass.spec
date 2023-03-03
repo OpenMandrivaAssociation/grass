@@ -1,43 +1,38 @@
-%define grassfix 64
-
 %if %{_use_internal_dependency_generator}
 %define __noautoreq '(.*)\\.so$|(.*)\\.so\\(\\)\\(64bit\\)$'
 %define __noautoprov '(.*)\\.so$|(.*)\\.so\\(\\)\\(64bit\\)$'
 %endif
 
 Name:		grass
-Version:	6.4.2
-Release:	4
+Version:	8.2.1
+Release:	1
 Group:		Sciences/Geosciences
 Summary:	Geographic Resources Analysis Support System
 License:	GPLv2+
 URL:		http://grass.osgeo.org/
 
-Source:		http://grass.osgeo.org/grass%{grassfix}/source/grass-%{version}.tar.gz
+Source:		https://github.com/OSGeo/grass/archive/refs/tags/%{version}.tar.gz
 Source2:	grass5_48.png
 Source3:	grass5_32.png
 Source4:	grass5_16.png
-Patch0:		grass-6.4.2-upstream-fix-gcc4_7.patch
-Patch1:		grass-6.4.2-nopycompile.patch
-Patch2:		grass-6.4.2-tk8.6.patch
-Patch3:		grass-6.4.2-docfiles.patch
+
+Patch0:		grass-8.2.1-mariadb-fix-build.patch
 
 BuildRequires:	bison
 BuildRequires:	gcc-gfortran
 BuildRequires:	flex
-BuildRequires:	lzma
 BuildRequires:	swig
 BuildRequires:	gd-devel >= 2.0
 BuildRequires:	gdal-devel
 BuildRequires:	gdbm-devel
 BuildRequires:	jpeg-devel
-BuildRequires:	lesstif-devel
+#BuildRequires:	lesstif-devel
 BuildRequires:	mysql-devel
 BuildRequires:	postgresql-devel
 BuildRequires:	proj proj-devel
 BuildRequires:	readline-devel
 BuildRequires:	tcl tcl-devel
-BuildRequires:	termcap-devel
+BuildRequires:	pkgconfig(ncursesw)
 BuildRequires:	tiff-devel
 BuildRequires:	tk tk-devel
 BuildRequires:	unixODBC-devel
@@ -71,17 +66,13 @@ production functionality that operates on various platforms
 through a graphical user interface and shell in X-Window.
 
 %prep
-%setup -q
-%patch0 -p1
-%patch1 -p1
-%patch2 -p1
-%patch3 -p1
+%autosetup -p1
 
 %build
 #autoreconf -fi
 %define __cputoolize true
 %define Werror_cflags %nil
-%configure2_5x --host=%{_host} \
+%configure --host=%{_host} \
 %if "%_lib" != "lib"
 	--enable-64bit \
 %endif
@@ -117,22 +108,18 @@ through a graphical user interface and shell in X-Window.
 
 %install
 mkdir -p %{buildroot}/%{_bindir}
-#%makeinstall_std INST_DIR=%{_libdir}/grass%{grassfix}
 # Actions in make install that don't take into account packaging in a place different to running:
-sed -e 's|^GISBASE.*|GISBASE=%{_libdir}/grass%{grassfix}|' \
- bin.%{_target_platform}/grass%{grassfix} > %{buildroot}/%{_bindir}/grass%{grassfix}
-chmod a+x %{buildroot}/usr/bin/grass%{grassfix}
+sed -e 's|^GISBASE.*|GISBASE=%{_libdir}/grass|' \
+ bin.%{_target_platform}/grass > %{buildroot}/%{_bindir}/grass
+chmod a+x %{buildroot}/usr/bin/grass
 
-mkdir -p %{buildroot}/%{_libdir}/grass%{grassfix}
-cp -a dist.%{_target_platform}/* %{buildroot}/%{_libdir}/grass%{grassfix}
+mkdir -p %{buildroot}/%{_libdir}/grass
+cp -a dist.%{_target_platform}/* %{buildroot}/%{_libdir}/grass
 
 # Add makefiles to includes:
-cp -a include/Make %{buildroot}/%{_libdir}/grass%{grassfix}/include/
+cp -a include/Make %{buildroot}/%{_libdir}/grass/include/
 
-# Manually archive the man pages:
-lzma %{buildroot}/%{_libdir}/grass%{grassfix}/man/man?/*
-
-mkdir %{buildroot}/%{_libdir}/grass%{grassfix}/locks/
+mkdir %{buildroot}/%{_libdir}/grass/locks/
 
 mkdir -p %{buildroot}%{_iconsdir}/hicolor/{16x16,32x32,48x48}/apps
 
@@ -143,9 +130,9 @@ install -m644 %{SOURCE4} %{buildroot}%{_iconsdir}/hicolor/16x16/apps/%{name}.png
 mkdir -p %{buildroot}%{_datadir}/applications
 cat > %{buildroot}%{_datadir}/applications/mandriva-%{name}.desktop << EOF
 [Desktop Entry]
-Name=Grass%{grassfix}
+Name=Grass
 Comment=Geographic Resources Analysis Support System
-Exec=grass%{grassfix}
+Exec=grass
 Icon=%{name}
 Terminal=true
 Type=Application
@@ -154,28 +141,29 @@ EOF
 
 mkdir -p %{buildroot}%{_sysconfdir}/ld.so.conf.d
 cat > %{buildroot}%{_sysconfdir}/ld.so.conf.d/grass.conf << EOF
-%{_libdir}/grass%{grassfix}/lib
+%{_libdir}/grass/lib
 EOF
 
 %files
-%doc AUTHORS COPYING INSTALL README CHANGES
 %attr(0755,root,root) %{_bindir}/*
 %{_sysconfdir}/ld.so.conf.d/*
 %{_datadir}/applications/mandriva-%{name}.desktop
 %{_iconsdir}/*/*/*/*
-%{_libdir}/grass%{grassfix}/grass%{grassfix}.tmp
-%{_libdir}/grass%{grassfix}/bin
-%{_libdir}/grass%{grassfix}/bwidget
-%{_libdir}/grass%{grassfix}/demolocation
-%{_libdir}/grass%{grassfix}/docs
-%{_libdir}/grass%{grassfix}/driver
-%{_libdir}/grass%{grassfix}/etc
-%{_libdir}/grass%{grassfix}/fonts
-%{_libdir}/grass%{grassfix}/include
-%{_libdir}/grass%{grassfix}/lib
-%{_libdir}/grass%{grassfix}/locale
-%{_libdir}/grass%{grassfix}/man
-%{_libdir}/grass%{grassfix}/scripts
-%{_libdir}/grass%{grassfix}/tools
-%attr(1777,root,root) %{_libdir}/grass%{grassfix}/locks
-
+%{_libdir}/grass/{AUTHORS,CHANGES,CITING,COPYING,GPL.txt,GPL.TXT,INSTALL.md,REQUIREMENTS.html}
+%{_libdir}/grass/grass.tmp
+%{_libdir}/grass/bin
+%{_libdir}/grass/contributors*
+%{_libdir}/grass/demolocation
+%{_libdir}/grass/docs
+%{_libdir}/grass/driver
+%{_libdir}/grass/etc
+%{_libdir}/grass/fonts
+%{_libdir}/grass/gui
+%{_libdir}/grass/include
+%{_libdir}/grass/lib
+%{_libdir}/grass/locale
+%{_libdir}/grass/scripts
+%{_libdir}/grass/share
+%{_libdir}/grass/translat*
+%{_libdir}/grass/utils
+%attr(1777,root,root) %{_libdir}/grass/locks
