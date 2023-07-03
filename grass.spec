@@ -4,14 +4,14 @@
 %endif
 
 Name:		grass
-Version:	8.2.1
+Version:	8.3.0
 Release:	1
 Group:		Sciences/Geosciences
 Summary:	Geographic Resources Analysis Support System
 License:	GPLv2+
 URL:		http://grass.osgeo.org/
 
-Source:		https://github.com/OSGeo/grass/archive/refs/tags/%{version}.tar.gz
+Source:		https://github.com/OSGeo/grass/archive/refs/tags/%{version}/%{name}-%{version}.tar.gz
 Source2:	grass5_48.png
 Source3:	grass5_32.png
 Source4:	grass5_16.png
