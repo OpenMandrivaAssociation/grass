@@ -16,7 +16,7 @@ Source2:	grass5_48.png
 Source3:	grass5_32.png
 Source4:	grass5_16.png
 
-Patch0:		grass-8.2.1-mariadb-fix-build.patch
+Patch0:		grass-8.3.0-mariadb-fix-build.patch
 
 BuildRequires:	bison
 BuildRequires:	gcc-gfortran

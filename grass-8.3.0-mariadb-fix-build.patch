@@ -1,0 +1,12 @@
+diff -up grass-8.2.1/db/drivers/mysql/db.c.omv~ grass-8.2.1/db/drivers/mysql/db.c
+--- grass-8.2.1/db/drivers/mysql/db.c.omv~	2023-03-03 23:46:15.138984887 +0100
++++ grass-8.2.1/db/drivers/mysql/db.c	2023-03-03 23:49:18.354343011 +0100
+@@ -54,7 +54,7 @@ int db__driver_open_database(dbHandle *
+ 
+         connection = mysql_init(NULL);
+         res = mysql_real_connect(connection, host, user, password,
+-                                 connpar.dbname, port, NULL, 0);
++				                  connpar.dbname, atoi(port), NULL, 0);
+ 
+         if (res == NULL) {
+             db_d_append_error("%s\n%s", _("Connection failed."),
