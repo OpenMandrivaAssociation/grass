@@ -150,7 +150,7 @@ EOF
 %{_sysconfdir}/ld.so.conf.d/*
 %{_datadir}/applications/mandriva-%{name}.desktop
 %{_iconsdir}/*/*/*/*
-%{_libdir}/grass/{AUTHORS,CHANGES,CITING,COPYING,GPL.txt,GPL.TXT,INSTALL.md,REQUIREMENTS.html}
+%{_libdir}/grass/{AUTHORS,CHANGES,CITING,COPYING,GPL.txt,GPL.TXT,INSTALL.md,REQUIREMENTS.md,REQUIREMENTS.html}
 %{_libdir}/grass/grass.tmp
 %{_libdir}/grass/bin
 %{_libdir}/grass/contributors*
