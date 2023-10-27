@@ -4,7 +4,7 @@
 %endif
 
 Name:		grass
-Version:	8.3.0
+Version:	8.3.1
 Release:	1
 Group:		Sciences/Geosciences
 Summary:	Geographic Resources Analysis Support System
@@ -51,6 +51,7 @@ BuildRequires:	pkgconfig(python)
 BuildRequires:	pkgconfig(sqlite3)
 BuildRequires:	pkgconfig(xmu)
 BuildRequires:	pkgconfig(zlib)
+BuildRequires:	pkgconfig(pdal)
 
 # disabled ffmpeg support for now, since it has to be fixed upstream
 #BuildRequires:	ffmpeg-devel
