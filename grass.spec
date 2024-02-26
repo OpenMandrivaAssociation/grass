@@ -4,7 +4,7 @@
 %endif
 
 Name:		grass
-Version:	8.3.0
+Version:	8.3.1
 Release:	1
 Group:		Sciences/Geosciences
 Summary:	Geographic Resources Analysis Support System
@@ -36,8 +36,6 @@ BuildRequires:	pkgconfig(ncursesw)
 BuildRequires:	tiff-devel
 BuildRequires:	tk tk-devel
 BuildRequires:	unixODBC-devel
-BuildRequires:	wxgtku-devel
-BuildRequires:	wxPythonGTK-devel
 
 BuildRequires:	pkgconfig(cairo)
 BuildRequires:	pkgconfig(cfitsio)
@@ -100,6 +98,7 @@ through a graphical user interface and shell in X-Window.
 	--with-proj-share=%{_datadir}/proj \
 	--with-nls \
 	--with-readline \
+        --without-pdal \
 #   --with-ffmpeg --with-ffmpeg-includes="%{_includedir}/libavcodec \
 #   %{_includedir}/libavdevice \
 #   %{_includedir}/libavformat %{_includedir}/libavutil \
