@@ -50,6 +50,8 @@ BuildRequires:	pkgconfig(sqlite3)
 BuildRequires:	pkgconfig(xmu)
 BuildRequires:	pkgconfig(zlib)
 BuildRequires:	pkgconfig(pdal)
+BuildRequires:	wxgtk-devel
+BuildRequires:  python-wxpython
 
 # disabled ffmpeg support for now, since it has to be fixed upstream
 #BuildRequires:	ffmpeg-devel
@@ -93,13 +95,13 @@ through a graphical user interface and shell in X-Window.
 	--with-odbc \
 	--enable-largefile \
 	--with-curses \
-	--with-python --with-wxwidgets="%{_bindir}/wx-config"\
+	--with-python \
+	--with-wxwidgets="%{_bindir}/wx-config" \
 	--with-sqlite \
 	--with-cxx \
 	--with-proj-share=%{_datadir}/proj \
 	--with-nls \
 	--with-readline \
-        --without-pdal \
 #   --with-ffmpeg --with-ffmpeg-includes="%{_includedir}/libavcodec \
 #   %{_includedir}/libavdevice \
 #   %{_includedir}/libavformat %{_includedir}/libavutil \
