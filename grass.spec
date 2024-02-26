@@ -88,7 +88,6 @@ through a graphical user interface and shell in X-Window.
 	--with-cairo \
 	--with-opengl-libs=%{_libdir} \
 	--with-motif-libs=%{_libdir} \
-	--with-motif-libs=%{_libdir} \
 	--with-motif-includes=%{_includedir} \
 	--with-gdal  \
         --with-geos \
