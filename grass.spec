@@ -25,6 +25,7 @@ BuildRequires:	swig
 BuildRequires:	gd-devel >= 2.0
 BuildRequires:	gdal-devel
 BuildRequires:	gdbm-devel
+BuildRequires:	gettext
 BuildRequires:	jpeg-devel
 #BuildRequires:	lesstif-devel
 BuildRequires:	mysql-devel
