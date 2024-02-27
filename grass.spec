@@ -3,6 +3,8 @@
 %define __noautoprov '(.*)\\.so$|(.*)\\.so\\(\\)\\(64bit\\)$'
 %endif
 
+%define short_ver %(echo %{version}|cut -d. -f 1,2 | sed -e 's/\\.//g')
+
 Name:		grass
 Version:	8.3.1
 Release:	1
@@ -110,19 +112,11 @@ through a graphical user interface and shell in X-Window.
 %make
 
 %install
-mkdir -p %{buildroot}/%{_bindir}
-# Actions in make install that don't take into account packaging in a place different to running:
-sed -e 's|^GISBASE.*|GISBASE=%{_libdir}/grass|' \
- bin.%{_target_platform}/grass > %{buildroot}/%{_bindir}/grass
-chmod a+x %{buildroot}/usr/bin/grass
 
-mkdir -p %{buildroot}/%{_libdir}/grass
-cp -a dist.%{_target_platform}/* %{buildroot}/%{_libdir}/grass
-
-# Add makefiles to includes:
-cp -a include/Make %{buildroot}/%{_libdir}/grass/include/
-
-mkdir %{buildroot}/%{_libdir}/grass/locks/
+%make_install \
+	DESTDIR=%{buildroot} \
+	prefix=%{_libdir} \
+	UNIX_BIN=%{_bindir} 
 
 mkdir -p %{buildroot}%{_iconsdir}/hicolor/{16x16,32x32,48x48}/apps
 
@@ -144,7 +138,7 @@ EOF
 
 mkdir -p %{buildroot}%{_sysconfdir}/ld.so.conf.d
 cat > %{buildroot}%{_sysconfdir}/ld.so.conf.d/grass.conf << EOF
-%{_libdir}/grass/lib
+%{_libdir}/grass%{short_ver}/lib
 EOF
 
 %files
@@ -152,21 +146,19 @@ EOF
 %{_sysconfdir}/ld.so.conf.d/*
 %{_datadir}/applications/mandriva-%{name}.desktop
 %{_iconsdir}/*/*/*/*
-%{_libdir}/grass/{AUTHORS,CHANGES,CITING,COPYING,GPL.txt,GPL.TXT,INSTALL.md,REQUIREMENTS.md,REQUIREMENTS.html}
-%{_libdir}/grass/grass.tmp
-%{_libdir}/grass/bin
-%{_libdir}/grass/contributors*
-%{_libdir}/grass/demolocation
-%{_libdir}/grass/docs
-%{_libdir}/grass/driver
-%{_libdir}/grass/etc
-%{_libdir}/grass/fonts
-%{_libdir}/grass/gui
-%{_libdir}/grass/include
-%{_libdir}/grass/lib
-%{_libdir}/grass/locale
-%{_libdir}/grass/scripts
-%{_libdir}/grass/share
-%{_libdir}/grass/translat*
-%{_libdir}/grass/utils
-%attr(1777,root,root) %{_libdir}/grass/locks
+%{_libdir}/grass%{short_ver}/{AUTHORS,CHANGES,CITING,COPYING,GPL.txt,GPL.TXT,INSTALL.md,REQUIREMENTS.md,REQUIREMENTS.html}
+%{_libdir}/grass%{short_ver}/bin
+%{_libdir}/grass%{short_ver}/contributors*
+%{_libdir}/grass%{short_ver}/demolocation
+%{_libdir}/grass%{short_ver}/docs
+%{_libdir}/grass%{short_ver}/driver
+%{_libdir}/grass%{short_ver}/etc
+%{_libdir}/grass%{short_ver}/fonts
+%{_libdir}/grass%{short_ver}/gui
+%{_libdir}/grass%{short_ver}/include
+%{_libdir}/grass%{short_ver}/lib
+%{_libdir}/grass%{short_ver}/locale
+%{_libdir}/grass%{short_ver}/scripts
+%{_libdir}/grass%{short_ver}/share
+%{_libdir}/grass%{short_ver}/translat*
+%{_libdir}/grass%{short_ver}/utils
