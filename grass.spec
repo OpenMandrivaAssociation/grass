@@ -29,15 +29,11 @@ BuildRequires:	gdal-devel
 BuildRequires:	gdbm-devel
 BuildRequires:	gettext
 BuildRequires:	jpeg-devel
-#BuildRequires:	lesstif-devel
 BuildRequires:	mysql-devel
 BuildRequires:	postgresql-devel
 BuildRequires:	proj proj-devel
 BuildRequires:	readline-devel
-BuildRequires:	tcl tcl-devel
-BuildRequires:	pkgconfig(ncursesw)
 BuildRequires:	tiff-devel
-BuildRequires:	tk tk-devel
 BuildRequires:	unixODBC-devel
 
 BuildRequires:	pkgconfig(cairo)
@@ -47,21 +43,18 @@ BuildRequires:	pkgconfig(freetype2)
 BuildRequires:	pkgconfig(geos)
 BuildRequires:	pkgconfig(glu)
 BuildRequires:	pkgconfig(libpng)
-BuildRequires:	pkgconfig(ncurses)
 BuildRequires:	pkgconfig(python)
 BuildRequires:	pkgconfig(sqlite3)
 BuildRequires:	pkgconfig(xmu)
 BuildRequires:	pkgconfig(zlib)
 BuildRequires:	pkgconfig(pdal)
-BuildRequires:	wxgtk-devel
 BuildRequires:  python-wxpython
 
 # disabled ffmpeg support for now, since it has to be fixed upstream
 #BuildRequires:	ffmpeg-devel
 
 Requires:	xterm
-Requires:	tk
-Requires:	tcl
+Requires:	python-wxpython
 
 %description
 GRASS (Geographic Resources Analysis Support System) is an 
