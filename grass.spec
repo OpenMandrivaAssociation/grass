@@ -78,27 +78,17 @@ through a graphical user interface and shell in X-Window.
 %define __cputoolize true
 %define Werror_cflags %nil
 %configure --host=%{_host} \
-%if "%_lib" != "lib"
-	--enable-64bit \
-%endif
-	--with-dbm-includes=%{_includedir}/gdbm/ \
 	--with-postgres \
 	--with-postgres-includes=%{_includedir}/ \
 	--with-freetype \
 	--with-freetype-includes=%{_includedir}/freetype2 \
-	--with-motif \
 	--with-cairo \
 	--with-opengl-libs=%{_libdir} \
-	--with-motif-libs=%{_libdir} \
-	--with-motif-includes=%{_includedir} \
 	--with-gdal  \
         --with-geos \
 	--with-mysql --with-mysql-includes=%{_includedir}/mysql \
 	--with-odbc \
 	--enable-largefile \
-	--with-curses \
-	--with-python \
-	--with-wxwidgets="%{_bindir}/wx-config" \
 	--with-sqlite \
 	--with-cxx \
 	--with-proj-share=%{_datadir}/proj \
@@ -109,7 +99,7 @@ through a graphical user interface and shell in X-Window.
 #   %{_includedir}/libavformat %{_includedir}/libavutil \
 #   %{_includedir}/libpostproc %{_includedir}/libswscale"
 
-%make
+%make_build
 
 %install
 
