@@ -53,7 +53,6 @@ BuildRequires:  python-wxpython
 # disabled ffmpeg support for now, since it has to be fixed upstream
 #BuildRequires:	ffmpeg-devel
 
-Requires:	xterm
 Requires:	python-wxpython
 
 %description
