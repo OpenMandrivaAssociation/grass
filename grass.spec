@@ -6,7 +6,7 @@
 %define short_ver %(echo %{version}|cut -d. -f 1,2 | sed -e 's/\\.//g')
 
 Name:		grass
-Version:	8.3.1
+Version:	8.3.2
 Release:	1
 Group:		Sciences/Geosciences
 Summary:	Geographic Resources Analysis Support System
