@@ -7,7 +7,7 @@
 
 Name:		grass
 Version:	8.3.2
-Release:	2
+Release:	3
 Group:		Sciences/Geosciences
 Summary:	Geographic Resources Analysis Support System
 License:	GPLv2+
