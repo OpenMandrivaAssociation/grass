@@ -11,7 +11,7 @@ Release:	3
 Group:		Sciences/Geosciences
 Summary:	Geographic Resources Analysis Support System
 License:	GPLv2+
-URL:		http://grass.osgeo.org/
+URL:		https://grass.osgeo.org/
 
 Source:		https://github.com/OSGeo/grass/archive/refs/tags/%{version}/%{name}-%{version}.tar.gz
 Source2:	grass5_48.png
