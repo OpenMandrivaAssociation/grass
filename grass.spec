@@ -6,8 +6,8 @@
 %define short_ver %(echo %{version}|cut -d. -f 1,2 | sed -e 's/\\.//g')
 
 Name:		grass
-Version:	8.3.2
-Release:	3
+Version:	8.4.0
+Release:	1
 Group:		Sciences/Geosciences
 Summary:	Geographic Resources Analysis Support System
 License:	GPLv2+
@@ -17,8 +17,6 @@ Source:		https://github.com/OSGeo/grass/archive/refs/tags/%{version}/%{name}-%{v
 Source2:	grass5_48.png
 Source3:	grass5_32.png
 Source4:	grass5_16.png
-
-Patch0:		grass-8.3.0-mariadb-fix-build.patch
 
 BuildRequires:	bison
 BuildRequires:	gcc-gfortran
