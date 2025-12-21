@@ -18,6 +18,11 @@ Source2:	grass5_48.png
 Source3:	grass5_32.png
 Source4:	grass5_16.png
 
+BuildRequires:	autoconf
+BuildRequires:	automake
+BuildRequires:	libtool-base
+BuildRequires:	slibtool
+BuildRequires:	make
 BuildRequires:	bison
 BuildRequires:	gcc-gfortran
 BuildRequires:	flex
