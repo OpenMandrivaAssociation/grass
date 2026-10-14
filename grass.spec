@@ -7,7 +7,7 @@
 
 Name:		grass
 Version:	8.5.0
-Release:	1
+Release:	2
 Group:		Sciences/Geosciences
 Summary:	Geographic Resources Analysis Support System
 License:	GPLv2+
@@ -47,17 +47,19 @@ BuildRequires:	pkgconfig(geos)
 BuildRequires:	pkgconfig(glu)
 BuildRequires:	pkgconfig(libpng)
 BuildRequires:	pkgconfig(nss)
-BuildRequires:	pkgconfig(python)
+BuildRequires:	pkgconfig(python3)
 BuildRequires:	pkgconfig(sqlite3)
 BuildRequires:	pkgconfig(xmu)
 BuildRequires:	pkgconfig(zlib)
 BuildRequires:	pkgconfig(pdal)
-BuildRequires:  python-wxpython
+# 4.2.5-1 is the Python 3.14 module.
+BuildRequires:	python-wxpython >= 4.2.5-2
 
 # disabled ffmpeg support for now, since it has to be fixed upstream
 #BuildRequires:	ffmpeg-devel
 
-Requires:	python-wxpython
+# 4.2.5-1 is the Python 3.14 module.
+Requires:	python-wxpython >= 4.2.5-2
 
 %description
 GRASS (Geographic Resources Analysis Support System) is an 
